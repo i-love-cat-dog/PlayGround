@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="overlay"></div>
+  <div class="card"></div>
+</div>
+
+<script>
+  var container = document.querySelector(".container");
+  var overlay = document.querySelector(".overlay");
+  container.addEventListener("mousemove", function (e) {
+    var x = e.offsetX;
+    var y = e.offsetY;
+    var rotateY = (-1 / 5) * x + 20;
+    var rotateX = (4 / 30) * y - 20;
+
+    overlay.style = `background-position : ${
+      x / 5 + y / 5
+    }%; filter : opacity(${x / 200}) brightness(1.2)`;
+
+    container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  container.addEventListener("mouseout", function () {
+    overlay.style = `background-position: ${x / 5}% ${y / 5}%;
+                   filter: opacity(${0.6 + x / 500}) brightness(1.5);`;
+
+    container.style = `transform: perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+</script>
+
+<style>
+  .container {
+    width: 290px;
+    height: 350px;
+    transition: all 0.1s;
+    position: relative;
+  }
+  .overlay {
+    position: absolute;
+    width: 290px;
+    height: 350px;
+    background: linear-gradient(
+      105deg,
+      transform 40%,
+      rgba(255, 219, 112, 0.8) 20%,
+      rgb(255, 0, 234) 50%,
+      transparent 80%
+    );
+    filter: brightness(5) opacity(0.8);
+    mix-blend-mode: color-dodge;
+    background-size: 150% 150%;
+    background-position: 100%;
+  }
+  .card {
+    width: 290px;
+    height: 350px;
+    background-image: url(Gain_bold.jpg);
+    background-size: cover;
+  }
+</style>
